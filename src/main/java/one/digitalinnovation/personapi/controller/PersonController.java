@@ -4,10 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import one.digitalinnovation.personapi.OpenApiConfig;
@@ -26,6 +23,11 @@ public class PersonController {
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
+
+    /*@GetMapping
+    public String Hello() {
+        return "Hello Controller";
+    }*/
 
     @PostMapping
     public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonForm personForm) {
