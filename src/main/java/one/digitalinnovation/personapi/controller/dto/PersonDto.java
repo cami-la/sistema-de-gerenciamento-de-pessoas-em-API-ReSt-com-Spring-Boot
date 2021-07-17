@@ -10,6 +10,8 @@ import org.hibernate.validator.constraints.br.CPF;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,8 @@ public class PersonDto {
     @CPF
     private String cpf;
 
+    private LocalDate birthDate;
+
     @Valid
     @NotEmpty
     private List<String> phones;
@@ -40,14 +44,13 @@ public class PersonDto {
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.cpf = person.getCpf();
+        this.birthDate = person.getBirthDate();
         this.phones = converterPhone(person);
     }
-
 
     public List<String> converterPhone(Person person) {
         List<Phone> phones = person.getPhones();
         return phones.stream().map(Phone::toString).collect(Collectors.toList());
     }
-
 
 }

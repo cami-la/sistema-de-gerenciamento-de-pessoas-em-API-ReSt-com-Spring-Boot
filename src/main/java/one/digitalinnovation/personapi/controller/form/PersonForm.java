@@ -1,5 +1,9 @@
 package one.digitalinnovation.personapi.controller.form;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +25,8 @@ import org.hibernate.validator.constraints.br.CPF;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PersonForm {
-	
+	private final DateTimeFormatter fornmatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
 	@NotNull
 	@NotEmpty
 	@Size(min = 5)
@@ -37,6 +42,8 @@ public class PersonForm {
 	@CPF
 	@Size(min = 8, max = 11)
 	private String cpf;
+
+	private String birthDate;
 	
 	/*@NotNull
 	@NotEmpty
@@ -46,15 +53,24 @@ public class PersonForm {
 	@NotEmpty
 	private List<Phone> phones;
 
-	public Person convert() {
-		/*List<Phone> phones = this.phones.stream().map(phone -> {
+	/*public Person convert() {
+		List<Phone> phones = this.phones.stream().map(phone -> {
 			//FIXME Aqui é preciso refinar essa conversão (ou ajustar o modelo do Form), para que seja possível identificar o tipo de telefone.
 			Phone entidade = new Phone();
 			entidade.setType(PhoneType.HOME);
 			entidade.setNumber(phone);
 			return entidade;
-		}).collect(Collectors.toList());*/
+		}).collect(Collectors.toList());
 		return new Person(firstName, lastName, cpf, phones);
+	}*/
+
+	public Person convert() {
+
+		LocalDate birthDate = LocalDate.parse(this.birthDate, fornmatter);
+
+		return new Person(firstName, lastName, cpf, birthDate, phones);
 	}
+
+
 
 }
