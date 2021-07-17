@@ -40,8 +40,8 @@ public class PersonController {
 
     /*@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson2(@RequestBody @Valid PersonDto personDto) {
-        personService.createPerson(personDto);
+    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDto personDto) {
+       return personService.createPerson(personDto);
     }*/
 
 }
