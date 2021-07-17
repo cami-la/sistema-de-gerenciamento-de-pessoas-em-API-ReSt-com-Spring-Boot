@@ -2,6 +2,7 @@ package one.digitalinnovation.personapi.controller;
 
 import javax.validation.Valid;
 
+import one.digitalinnovation.personapi.controller.dto.MessageResponseDTO;
 import one.digitalinnovation.personapi.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,11 @@ public class PersonController {
     public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonForm personForm) {
        return this.personService.createPerson(personForm);
     }
+
+    /*@PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MessageResponseDTO createPerson2(@RequestBody @Valid PersonDto personDto) {
+        personService.createPerson(personDto);
+    }*/
 
 }

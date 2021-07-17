@@ -1,5 +1,6 @@
 package one.digitalinnovation.personapi.service;
 
+import one.digitalinnovation.personapi.controller.dto.MessageResponseDTO;
 import one.digitalinnovation.personapi.controller.dto.PersonDto;
 import one.digitalinnovation.personapi.controller.form.PersonForm;
 import one.digitalinnovation.personapi.entity.Person;
@@ -21,5 +22,13 @@ public class PersonService {
         return ResponseEntity.ok(new PersonDto(savedPerson));
     }
 
+    /*public MessageResponseDTO createPerson(Person person) {
+        Person savedPerson = personRepository.save(person);
+
+        return MessageResponseDTO
+                .builder()
+                .message("Created person with ID " + savedPerson.getId())
+                .build();
+    }*/
 
 }

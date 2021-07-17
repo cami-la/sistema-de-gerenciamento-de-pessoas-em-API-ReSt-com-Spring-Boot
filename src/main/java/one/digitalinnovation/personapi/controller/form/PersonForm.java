@@ -14,6 +14,7 @@ import lombok.Setter;
 import one.digitalinnovation.personapi.entity.Person;
 import one.digitalinnovation.personapi.entity.Phone;
 import one.digitalinnovation.personapi.enums.PhoneType;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Getter
 @Setter
@@ -33,6 +34,7 @@ public class PersonForm {
 	
 	@NotNull
 	@NotEmpty
+	@CPF
 	@Size(min = 8, max = 11)
 	private String cpf;
 	

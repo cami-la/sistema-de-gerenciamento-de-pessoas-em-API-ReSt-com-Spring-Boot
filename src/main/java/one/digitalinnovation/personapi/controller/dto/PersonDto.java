@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import one.digitalinnovation.personapi.entity.Person;
 import one.digitalinnovation.personapi.entity.Phone;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +18,21 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class PersonDto {
     private Long id;
+
+    @NotEmpty
+    @Size(min = 2, max = 100)
     private String firstName;
+
+    @NotEmpty
+    @Size(min = 2, max = 100)
     private String lastName;
+
+    @NotEmpty
+    @CPF
     private String cpf;
+
+    @Valid
+    @NotEmpty
     private List<String> phones;
 
     public PersonDto(Person person) {
