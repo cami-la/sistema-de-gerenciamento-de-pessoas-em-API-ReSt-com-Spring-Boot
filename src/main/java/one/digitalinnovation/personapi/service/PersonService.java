@@ -15,10 +15,10 @@ public class PersonService {
     PersonRepository personRepository;
 
     public ResponseEntity<PersonDto> createPerson(PersonForm personForm) {
-        Person person = personForm.convert();
-        personRepository.save(person);
+        Person savedPerson = personForm.convert();
+        personRepository.save(savedPerson);
 
-        return ResponseEntity.ok(new PersonDto(person));
+        return ResponseEntity.ok(new PersonDto(savedPerson));
     }
 
 

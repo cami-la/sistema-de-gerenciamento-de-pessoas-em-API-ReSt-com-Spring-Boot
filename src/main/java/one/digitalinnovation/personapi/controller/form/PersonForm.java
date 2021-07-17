@@ -7,7 +7,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import one.digitalinnovation.personapi.entity.Person;
 import one.digitalinnovation.personapi.entity.Phone;
@@ -15,6 +17,8 @@ import one.digitalinnovation.personapi.enums.PhoneType;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PersonForm {
 	
 	@NotNull
@@ -32,18 +36,22 @@ public class PersonForm {
 	@Size(min = 8, max = 11)
 	private String cpf;
 	
+	/*@NotNull
+	@NotEmpty
+	private List<String> phones;*/
+
 	@NotNull
 	@NotEmpty
-	private List<String> phones;
+	private List<Phone> phones;
 
 	public Person convert() {
-		List<Phone> phones = this.phones.stream().map(phone -> {
+		/*List<Phone> phones = this.phones.stream().map(phone -> {
 			//FIXME Aqui é preciso refinar essa conversão (ou ajustar o modelo do Form), para que seja possível identificar o tipo de telefone.
 			Phone entidade = new Phone();
 			entidade.setType(PhoneType.HOME);
 			entidade.setNumber(phone);
 			return entidade;
-		}).collect(Collectors.toList());
+		}).collect(Collectors.toList());*/
 		return new Person(firstName, lastName, cpf, phones);
 	}
 
