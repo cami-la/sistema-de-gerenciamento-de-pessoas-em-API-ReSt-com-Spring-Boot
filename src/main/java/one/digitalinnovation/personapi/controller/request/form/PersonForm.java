@@ -1,11 +1,8 @@
-package one.digitalinnovation.personapi.controller.form;
+package one.digitalinnovation.personapi.controller.request.form;
 
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -17,7 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import one.digitalinnovation.personapi.entity.Person;
 import one.digitalinnovation.personapi.entity.Phone;
-import one.digitalinnovation.personapi.enums.PhoneType;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Getter

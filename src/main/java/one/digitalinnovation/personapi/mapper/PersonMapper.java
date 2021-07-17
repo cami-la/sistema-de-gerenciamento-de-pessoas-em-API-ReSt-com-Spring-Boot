@@ -1,6 +1,6 @@
 package one.digitalinnovation.personapi.mapper;
 
-import one.digitalinnovation.personapi.controller.dto.PersonDto;
+import one.digitalinnovation.personapi.controller.response.dto.PersonDto;
 import one.digitalinnovation.personapi.entity.Person;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

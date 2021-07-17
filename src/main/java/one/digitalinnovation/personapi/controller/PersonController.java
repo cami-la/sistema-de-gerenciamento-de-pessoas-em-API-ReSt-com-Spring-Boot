@@ -2,8 +2,8 @@ package one.digitalinnovation.personapi.controller;
 
 import javax.validation.Valid;
 
-import one.digitalinnovation.personapi.controller.dto.MessageResponseDTO;
-import one.digitalinnovation.personapi.entity.Person;
+import one.digitalinnovation.personapi.controller.response.dto.MessageResponseDTO;
+import one.digitalinnovation.personapi.controller.response.dto.PersonDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import one.digitalinnovation.personapi.OpenApiConfig;
-import one.digitalinnovation.personapi.controller.dto.PersonDto;
-import one.digitalinnovation.personapi.controller.form.PersonForm;
+import one.digitalinnovation.personapi.controller.request.form.PersonForm;
 import one.digitalinnovation.personapi.service.PersonService;
 
 @Tag(name = OpenApiConfig.TAG_PESSOAS)
@@ -27,21 +26,25 @@ public class PersonController {
         this.personService = personService;
     }
 
-    /*@GetMapping
+    @GetMapping
     public String Hello() {
         return "Hello Controller";
-    }*/
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonForm personForm) {
-       return this.personService.createPerson(personForm);
     }
 
     /*@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody @Valid PersonDto personDto) {
-       return personService.createPerson(personDto);
+    public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonForm personForm) {
+       return this.personService.createPerson(personForm);
     }*/
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MessageResponseDTO createPerson(@RequestBody @Valid PersonForm personDto) {
+       return personService.createPerson(personDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<PersonDto> listAll() {
+        return personService.listAll();
+    }
 }

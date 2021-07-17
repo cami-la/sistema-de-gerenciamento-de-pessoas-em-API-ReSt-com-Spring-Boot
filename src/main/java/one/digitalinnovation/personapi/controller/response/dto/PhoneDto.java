@@ -1,10 +1,9 @@
-package one.digitalinnovation.personapi.controller.dto;
+package one.digitalinnovation.personapi.controller.response.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import one.digitalinnovation.personapi.entity.Person;
 import one.digitalinnovation.personapi.entity.Phone;
 import one.digitalinnovation.personapi.enums.PhoneType;
 

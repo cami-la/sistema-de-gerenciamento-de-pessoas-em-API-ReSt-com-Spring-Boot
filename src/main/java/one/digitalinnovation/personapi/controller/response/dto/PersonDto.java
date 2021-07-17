@@ -1,4 +1,4 @@
-package one.digitalinnovation.personapi.controller.dto;
+package one.digitalinnovation.personapi.controller.response.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
