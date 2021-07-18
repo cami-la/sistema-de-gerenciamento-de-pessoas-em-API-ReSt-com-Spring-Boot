@@ -13,6 +13,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import one.digitalinnovation.personapi.OpenApiConfig;
 import one.digitalinnovation.personapi.controller.request.form.PersonForm;
 import one.digitalinnovation.personapi.service.PersonService;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
 
 @Tag(name = OpenApiConfig.TAG_PESSOAS)
 @RestController
@@ -26,25 +29,26 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping
+    /*@GetMapping
     public String Hello() {
         return "Hello Controller";
-    }
-
-    /*@PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonForm personForm) {
-       return this.personService.createPerson(personForm);
     }*/
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public MessageResponseDTO createPerson(@RequestBody @Valid PersonForm personDto) {
-       return personService.createPerson(personDto);
+    public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonForm personForm, UriComponentsBuilder uriComponentsBuilder) {
+       return this.personService.createPerson(personForm, uriComponentsBuilder);
     }
 
-    @GetMapping
-    public ResponseEntity<PersonDto> listAll() {
+    /*@PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MessageResponseDTO createPerson(@RequestBody @Valid PersonForm personDto) {
+       return personService.createPerson(personDto);
+    }*/
+
+    @GetMapping()
+    public List<PersonDto> listAll() {
         return personService.listAll();
     }
+
 }

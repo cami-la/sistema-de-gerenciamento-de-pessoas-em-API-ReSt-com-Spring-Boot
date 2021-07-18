@@ -30,7 +30,7 @@ public class PersonForm {
 	
 	@NotNull
 	@NotEmpty
-	@Size(min = 10)
+	@Size(min = 5)
 	private String lastName;
 	
 	@NotNull
@@ -49,16 +49,6 @@ public class PersonForm {
 	@NotEmpty
 	private List<Phone> phones;
 
-	/*public Person convert() {
-		List<Phone> phones = this.phones.stream().map(phone -> {
-			//FIXME Aqui é preciso refinar essa conversão (ou ajustar o modelo do Form), para que seja possível identificar o tipo de telefone.
-			Phone entidade = new Phone();
-			entidade.setType(PhoneType.HOME);
-			entidade.setNumber(phone);
-			return entidade;
-		}).collect(Collectors.toList());
-		return new Person(firstName, lastName, cpf, phones);
-	}*/
 
 	public Person convert() {
 

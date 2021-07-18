@@ -8,8 +8,9 @@ import one.digitalinnovation.personapi.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @Service
@@ -24,14 +25,19 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    /*public ResponseEntity<PersonDto> createPerson(PersonForm personForm) {
+    public ResponseEntity<PersonDto> createPerson(PersonForm personForm, UriComponentsBuilder uriComponentsBuilder) {
         Person savedPerson = personForm.convert();
         personRepository.save(savedPerson);
 
-        return ResponseEntity.ok(new PersonDto(savedPerson));
-    }*/
+        URI uri = uriComponentsBuilder.path("/api/v1/people/{id}")
+                .buildAndExpand(savedPerson.getId())
+                .toUri();
 
-    public MessageResponseDTO createPerson(PersonForm personForm) {
+        return ResponseEntity.created(uri)
+                .body(new PersonDto(savedPerson));
+    }
+
+    /*public MessageResponseDTO createPerson(PersonForm personForm) {
         Person personToSave = personForm.convert();
 
         Person savedPerson = personRepository.save(personToSave);
@@ -40,11 +46,11 @@ public class PersonService {
                 .builder()
                 .message("Created person with ID " + savedPerson.getId())
                 .build();
-    }
-
-
-    /*public ResponseEntity<PersonDto> listAll() {
-        List<Person> allPeople = personRepository.findAll();
-
     }*/
+
+
+    public List<PersonDto> listAll() {
+        List<Person> list = personRepository.findAll();
+        return PersonDto.converter(list);
+    }
 }

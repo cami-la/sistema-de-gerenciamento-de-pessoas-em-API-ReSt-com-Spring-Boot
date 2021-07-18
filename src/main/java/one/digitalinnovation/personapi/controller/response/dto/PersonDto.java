@@ -52,4 +52,8 @@ public class PersonDto {
         return phones.stream().map(Phone::toString).collect(Collectors.toList());
     }
 
+    public static List<PersonDto> converter(List<Person> peoples) {
+        return peoples.stream().map(PersonDto::new).collect(Collectors.toList());
+    }
+
 }
