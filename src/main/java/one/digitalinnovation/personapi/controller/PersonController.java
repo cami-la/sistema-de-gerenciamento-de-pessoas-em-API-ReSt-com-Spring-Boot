@@ -54,14 +54,20 @@ public class PersonController {
         return personService.listAll();
     }
 
-    /*@GetMapping("{/{cpf}")
-    public PersonDto listPerson(@PathVariable String cpf) {
-        return personService.listPerson(cpf);
-    }*/
+    @GetMapping("/{cpf}")
+    public ResponseEntity<PersonDto> findByCpf (@PathVariable String cpf) {
+        return personService.findByCpf(cpf);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<PersonDto> findById(@PathVariable Long id) {
         return personService.finbyId(id);
     }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
+    public ResponseEntity deleteById(@PathVariable Long id) {
+        return personService.deleteById(id);
+    }
 }

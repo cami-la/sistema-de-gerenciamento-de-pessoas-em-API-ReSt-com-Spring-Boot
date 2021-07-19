@@ -58,17 +58,30 @@ public class PersonService {
     }
 
     public ResponseEntity<PersonDto> finbyId(Long id) {
-        Optional<Person> person = personRepository.findById(id);
-        if (person.isPresent()) {
-            return ResponseEntity.ok(new PersonDto(person.get()));
+        Optional<Person> personById = personRepository.findById(id);
+        if (personById.isPresent()) {
+            return ResponseEntity.ok(new PersonDto(personById.get()));
         }
         return ResponseEntity.notFound().build();
     }
 
-    /*public PersonDto listPerson(String cpf) {
-        Person byCpf = personRepository.findByCpf();
-        return new PersonDto(byCpf);
-    }*/
+    public ResponseEntity deleteById(Long id) {
+        Optional<Person> personById = personRepository.findById(id);
+        if(personById.isPresent()) {
+            personRepository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    public ResponseEntity<PersonDto> findByCpf(String cpf) {
+        Person byCpf = personRepository.findByCpf(cpf);
+        Person personByCpf = personRepository.findByCpf(cpf);
+        if (personByCpf != null) {
+            return ResponseEntity.ok(new PersonDto(personByCpf));
+        }
+        return ResponseEntity.notFound().build();
+    }
 
 
 }
