@@ -7,6 +7,7 @@ import one.digitalinnovation.personapi.controller.response.dto.PersonDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,6 +17,7 @@ import one.digitalinnovation.personapi.service.PersonService;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Optional;
 
 @Tag(name = OpenApiConfig.TAG_PESSOAS)
 @RestController
@@ -36,6 +38,7 @@ public class PersonController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @Transactional
     public ResponseEntity<PersonDto> createPerson(@RequestBody @Valid PersonForm personForm, UriComponentsBuilder uriComponentsBuilder) {
        return this.personService.createPerson(personForm, uriComponentsBuilder);
     }
@@ -49,6 +52,16 @@ public class PersonController {
     @GetMapping()
     public List<PersonDto> listAll() {
         return personService.listAll();
+    }
+
+    /*@GetMapping("{/{cpf}")
+    public PersonDto listPerson(@PathVariable String cpf) {
+        return personService.listPerson(cpf);
+    }*/
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonDto> findById(@PathVariable Long id) {
+        return personService.finbyId(id);
     }
 
 }
