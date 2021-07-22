@@ -1,5 +1,6 @@
 package one.digitalinnovation.personapi.service;
 
+import one.digitalinnovation.personapi.controller.request.form.UpdatePersonForm;
 import one.digitalinnovation.personapi.controller.response.dto.MessageResponseDTO;
 import one.digitalinnovation.personapi.controller.request.form.PersonForm;
 import one.digitalinnovation.personapi.controller.response.dto.PersonDto;
@@ -65,7 +66,7 @@ public class PersonService {
         return ResponseEntity.notFound().build();
     }
 
-    public ResponseEntity deleteById(Long id) {
+    public ResponseEntity<PersonDto> deleteById(Long id) {
         Optional<Person> personById = personRepository.findById(id);
         if(personById.isPresent()) {
             personRepository.deleteById(id);
@@ -83,5 +84,17 @@ public class PersonService {
         return ResponseEntity.notFound().build();
     }
 
+    public ResponseEntity<PersonDto> updateById(Long id, UpdatePersonForm personForm) {
+        Optional<Person> personById = personRepository.findById(id);
+        if (personById.isPresent()) {
+            Person person = personById.get();
+            person.setFirstName(personForm.getFirstName());
+            person.setLastName(personForm.getLastName());
+            person.setPhones(person.getPhones());
 
+            return ResponseEntity.ok(new PersonDto(personById.get()));
+        }
+        return ResponseEntity.notFound().build();
+
+    }
 }

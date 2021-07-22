@@ -40,4 +40,10 @@ public class Person {
 		this.birthDate = birthDate;
 		this.phones = phones;
 	}
+
+	public Person(String firstName, String lastName, List<Phone> phones) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phones = phones;
+	}
 }

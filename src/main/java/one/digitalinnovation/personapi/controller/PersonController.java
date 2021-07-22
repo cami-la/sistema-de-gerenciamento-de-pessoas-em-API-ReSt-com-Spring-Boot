@@ -2,8 +2,10 @@ package one.digitalinnovation.personapi.controller;
 
 import javax.validation.Valid;
 
+import one.digitalinnovation.personapi.controller.request.form.UpdatePersonForm;
 import one.digitalinnovation.personapi.controller.response.dto.MessageResponseDTO;
 import one.digitalinnovation.personapi.controller.response.dto.PersonDto;
+import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,10 +56,10 @@ public class PersonController {
         return personService.listAll();
     }
 
-    @GetMapping("/{cpf}")
-    public ResponseEntity<PersonDto> findByCpf (@PathVariable String cpf) {
+    /*/@GetMapping("/{cpf}")
+    public ResponseEntity<PersonDto> findByCpf (String cpf) {
         return personService.findByCpf(cpf);
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<PersonDto> findById(@PathVariable Long id) {
@@ -67,7 +69,15 @@ public class PersonController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    public ResponseEntity deleteById(@PathVariable Long id) {
+    public ResponseEntity<PersonDto> deleteById(@PathVariable Long id) {
         return personService.deleteById(id);
     }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<PersonDto> update(@PathVariable Long id, @RequestBody @Valid UpdatePersonForm personForm) {
+        return personService.updateById(id, personForm);
+
+    }
+
 }
