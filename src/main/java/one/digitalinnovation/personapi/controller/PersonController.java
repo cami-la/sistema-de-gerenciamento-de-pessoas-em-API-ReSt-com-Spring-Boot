@@ -2,10 +2,9 @@ package one.digitalinnovation.personapi.controller;
 
 import javax.validation.Valid;
 
+import lombok.AllArgsConstructor;
 import one.digitalinnovation.personapi.controller.request.form.UpdatePersonForm;
-import one.digitalinnovation.personapi.controller.response.dto.MessageResponseDTO;
 import one.digitalinnovation.personapi.controller.response.dto.PersonDto;
-import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,19 +18,14 @@ import one.digitalinnovation.personapi.service.PersonService;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
-import java.util.Optional;
 
 @Tag(name = OpenApiConfig.TAG_PESSOAS)
 @RestController
 @RequestMapping("/api/v1/people")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class PersonController {
 
     private final PersonService personService;
-
-    @Autowired
-    public PersonController(PersonService personService) {
-        this.personService = personService;
-    }
 
     /*@GetMapping
     public String Hello() {
