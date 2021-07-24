@@ -1,5 +1,0 @@
-- Não implementei o mapStruct
-- Seguindo as boas práticas Rest API, no método cadastrar retornei um ResponseEntity, indicando o código 201 através das classes URI e UriComponentBuilder
-- Tratamento de erro de formulário utilizando a a anotação @RestControllerAdvicer
--
-
