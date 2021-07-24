@@ -77,7 +77,6 @@ public class PersonController {
     @Transactional
     public ResponseEntity<PersonDto> update(@PathVariable Long id, @RequestBody @Valid UpdatePersonForm personForm) {
         return personService.updateById(id, personForm);
-
     }
 
 }

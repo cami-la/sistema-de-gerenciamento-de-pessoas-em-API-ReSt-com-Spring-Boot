@@ -60,10 +60,8 @@ public class PersonService {
 
     public ResponseEntity<PersonDto> finbyId(Long id) {
         Optional<Person> personById = personRepository.findById(id);
-        if (personById.isPresent()) {
-            return ResponseEntity.ok(new PersonDto(personById.get()));
-        }
-        return ResponseEntity.notFound().build();
+        return personById.map(person -> ResponseEntity.ok(new PersonDto(person)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     public ResponseEntity<PersonDto> deleteById(Long id) {
@@ -90,11 +88,12 @@ public class PersonService {
             Person person = personById.get();
             person.setFirstName(personForm.getFirstName());
             person.setLastName(personForm.getLastName());
-            person.setPhones(person.getPhones());
+            person.setPhones(personForm.getPhones());
 
             return ResponseEntity.ok(new PersonDto(personById.get()));
         }
         return ResponseEntity.notFound().build();
-
     }
+
+
 }
